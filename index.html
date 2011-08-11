@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Net Price Calculator</title>
+</head>
+<body>
+<h1>Net Price Calculator</h1>
+<p>
+The Net Price Calculator project stems from a government mandate that all universities provide a web accessible calculator that not only
+defines the tuition of the university but other associated costs as well (ie: Books, Transportation, Room & Board)
+<h2>License</h2>
+This Net Price Calculator is dual licensed under the <a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a> or <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License">GPL Version 2 licenses</a>
+<h2>Terms</h2>
+<kbd>
+Copyright &copy; 2011 by Kettering University
+<p>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+</p>
+<p>
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+</p>
+<p>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+</kbd>
+<h1>Demonstration</h1>
+A <a href="demo.html">Demonstration</a> page has been set up using the requirements of Kettering University.
+<h2>Audience</h2>
+<p>
+This plugin requires a sound understanding of javascript arrays and objects as well as a working knowledge of the <a href="jquery.com">jQuery</a> Javascript Framework.  The only file that should need to be customized is the template file which is used
+to format the user interface as well as define the Profiles, Awards, and Costs associated with attending a college or university.</p>
+
+<p>
+To learn about javascript arrays and objects please refer to the resources below:
+<ul>
+	<li><a href="http://www.w3schools.com/JS/js_obj_array.asp">The Javascript Array Object</a></li>
+    <li><a href="http://www.w3schools.com/js/js_objects.asp">Javascript Create your own Objects</a></li>
+</ul>
+
+<h2>Files:</h2>
+<strong>jquery.js</strong> - This plugin uses the jQuery framework version 1.3.1<br />
+<strong>netprice.js</strong> - The actual plugin logic<br />
+<strong>netprice.css</strong> - The Stylesheet for formatting the calculator<br />
+<strong>template.txt</strong> - The Template used by the plugin to pull in customized values and the User Interface<br />
+<strong>demo.html</strong> - The demonstration application for this plugin
+
+<h2>Initialization:</h2>
+<p>
+The plugin has one default option, the location of the template file.  The default value for this option is the template.txt file that is
+included in the package.
+</p>
+
+<h3>Using Default Template:</h3>
+<p>
+$("#calculator").netPrice();
+</p>
+<p>
+<h3>Using a custom template file</h3>
+<p>
+$("#calculator").netPrice(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;templateURL:[path to template]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;);
+</p>
+<h3>Restrictions:</h3>
+<p>
+In order for the calculator to work correctly the Allow-Control-Orgin [template domain] must be enabled on the remote server if a template file from a different domain is used.
+See <a href="https://developer.mozilla.org/en/HTTP_access_control" target="_blank">HTTP Access Control</a> for more information.
+</p>
+<p>
+The template must have at least 1 element with the netprice_slide class.  This is what is used for the navigational buttons.
+</p>
+
+<h2>template.txt Important Notes:</h2>
+<p>
+		 The formatting is standard html with the exception of a few custom tags that have special meaning to the calculator:
+        </p>
+<blockquote>
+			&lt;EFCFIELD/&gt; - This will be the location where the EFC Input box will appear<hr/>
+			&lt;EFCVALUE/&gt; - This will display the value currently entered in the EFC Field<hr/>
+			&lt;PROFILE&gt;&lt;/PROFILE&gt; - This tag set will contain the Profile Selection options.  These options can be customized
+								  to your organization using an Array of profile objects.<br/>
+                                  <blockquote>
+								  <strong>Profile Array Example:</strong> <br/>
+								  profile[0]={<blockquote>
+                                  			   <strong>name</strong>:"Profile 1"<br/>
+								  			  ,<strong>number</strong>:1<br/>
+								  			  ,<strong>gpa</strong>:{min:4.00,max:4.00}<br/>
+								  			  ,<strong>sat</strong>:{min:1360,max:1600}<br/>
+								  			  ,<strong>act</strong>:{min:31,max:36}<br/>
+								  			  ,<strong>checked</strong>:true<br/>
+								  };<br/>
+                                  </blockquote>
+                                  <strong>Object Definition:</strong><br/>
+								  <strong>name (string)</strong> - Name of the profile to be displayed in the legend of the fieldset<br/>
+								  <strong>number (int)</strong> - Used to identify the profile number, currently unused but may be necessary in future releases<br/>
+								  <strong>gpa (object)</strong> - The GPA Object identifies the values to display for the minimum and maximum values of the Grade Point Average for the profile<br/>
+                                    <blockquote>
+									min (float)<br/>
+									max (float)<br/>
+                                    </blockquote>
+								  <strong>sat (object)</strong> - The SAT Object identifies the values to display for the minimum and maximum values of the SAT Test Scores for the profile<br/>
+                                    <blockquote>
+									min (float)<br/>
+									max (float)<br/>
+                                    </blockquote>
+								  <strong>act (Object)</strong> - The ACT Object identifies the values to display for the minimum and maximum values of the ACT Test Scores for the profile<br/>
+                                    <blockquote>
+									min (float)<br/>
+									max (float)<br/>
+                                    </blockquote>
+								  <strong>checked (boolean)</strong> - if true then the radio button for this profile will be checked, if false it will not be checked.<br/>
+</blockquote>
+                                  <hr/>
+			&lt;PROFILELABEL/&gt; - This tag will contain the name value of the profile currently selected.<hr/>
+			&lt;RESIDENCY&gt;&lt;/RESIDENCY&gt; - This tag set will contain an array of residency options.  These optins can be customized
+									  to your organization using an Array of Residency Objects.<br/>
+                                      <blockquote>
+									<strong>Residency Array Example:</strong><br/>
+										residency[0] = {<br/>
+                                        	<blockquote>
+														<strong>name</strong>:'residency'<br/>
+														,<strong>id</strong>:'instate'<br/>
+														,<strong>value</strong>:'UNGRA1'<br/>
+														,<strong>label</strong>:'Residing in the state of Michigan'<br/>
+														,<strong>checked</strong>:true<br/>
+														};<br/>
+                                            </blockquote>
+                                        <strong>Residency Object Description</strong><br/>
+										<strong>name (string)</strong> - The name of the radio button element used to select the option<br/>
+										<strong>id (string}</strong> - The ID of the radio button, for future development<br/>
+										<strong>value (string)</strong> - The value of the radio button element.  This serves as the link to the cost object described below.<br/>
+										<strong>label (string)</strong> - The text that will be displayed next to the radio button in the user interface<br/>
+										<strong>checked (boolean)</strong> - If true then the radio button will be checked by default.<br/>
+                                      </blockquote>
+                                      <hr/>
+			&lt;RESIDENCYLABEL/&gt; - This tag will display the label value of the current residency object selected.<hr/>
+  <p>&lt;COSTS&gt;&lt;/COSTS&gt; - This tag set is used to define the costs associated with the net price of a university.  You can customize this
+							  using an array of cost objects.
+  </p>
+  <p><strong>costs array example:</strong><strong><br />
+  </strong>costs = [
+  </p>
+  <blockquote>
+    <p><br />
+      {
+      <br />
+      <strong>"name"</strong>:"BOOK"<br />
+      <strong>,"cost":</strong>"1200"<br />
+      ,<strong>"code":</strong>"UNGRA1"<br />
+      ,<strong>"label":</strong>"Books & Supplies"<br />
+      <strong>,"description"</strong>:"The estimated cost of Books averaged over a 4 year period"<br />
+    }</p>
+  </blockquote>
+  <p><br />
+    ]      </p>
+<p><strong>name (string) </strong>- The name of the cost, used when looking up costs using $.fn.netprice.getCost([cost.name],[residency.value]) <br />
+    <strong>cost (float) </strong>- the actual cost of the item for a complete school year <br />
+    <strong>code (string)</strong> - Used to seperate costs based on residency.  The value of the residency object determines which cost is displayed
+    label (string) - The text that is displayed on the screen when the cost has been selected <br />
+    <strong>description (string)</strong> - Additional information that will appear when the label is clicked on.</p>
+<p>&nbsp; </p>
+<hr />
+<p>&lt;NEED/&gt; - This tag will display the need calculation by totaling all of the costs and then subtracting the EFC value entered    </p>
+<hr />
+<p>&lt;AWARDS&gt;&lt;/AWARDS&gt; - This tag will display the award values based on the calculations provided.  This can be customized using an array
+	    of award objects.  During calculation all awards defined between these tags will be listed.    </p>
+<p><strong>Award Array Example:    </strong></p>
+<p>award[0] = { </p>
+<blockquote>
+  <p><strong>name</strong>:"Merit"
+    <br />
+    ,<strong>description</strong>:"Based on a student's academic, artistic, athletic or other abilities, and often factor in an applicant's extracurricular activities and community service record. The most common merit-based scholarships, awarded by either private organizations or directly by a student's intended college, recognize academic achievement or high scores on standardized tests"
+    ,<br />
+    <strong>rule</strong>:function(efc,profile,residency){ </p>
+  <blockquote>
+    <p> var retval = 0;<br />
+switch(parseInt(profile)){</p>
+    <blockquote>
+      <p> case 1:
+        case 2:        <br />
+        &nbsp;&nbsp;retval = 15000;
+        <br />
+        break;
+        <br />
+        case 3:
+        <br />
+        case 4:
+        <br />
+        &nbsp;&nbsp;retval = 14000;
+        <br />
+        break;
+        <br />
+        case 5:
+        <br />
+        case 6:
+        <br />
+        case 7:
+        <br />
+        &nbsp;&nbsp;retval = 13000;
+        <br />
+        break;
+        <br />
+        case 8:
+        <br />
+        &nbsp;&nbsp;retval = 2000;<br />
+break; </p>
+</blockquote>
+    <p>}
+      return retval;
+      } </p>
+  </blockquote>
+</blockquote>
+<p>}; </p>
+<p><strong>Award Object Definition:</strong></p>
+<p><strong>name (string):</strong> The name of the award as it will be displayed to the end user  <br />
+  <strong>description (string):</strong> A short description of the award that will appear when the name is clicked
+  <br />
+  <strong>rule (function):</strong> The logic that will return the awarded amount based on the EFC value, the Profile selected, and the residency selected
+  the function must have all three inputs defined in the function even if they are not used.
+  The return value should always be a numeric value    </p>
+<hr />
+<p>&lt;NETPRICE/&gt; - This tag will be updated with the net price (cost of attendance - awards) after every calculation
+    &lt;TOTAL&gt; - The Total Costs will be updated here after every calculation    </p>
+<hr />
+<p>&lt;AWARDTOTAL&gt; - The total awards will be placed here after every calculation      </p>
+<hr />
+<blockquote>&nbsp; </blockquote>
+</blockquote>
+
+<h1>Constructor:</h1>
+	<blockquote>
+    	$('').netPrice(options) - Initializes the netprice Plugin
+    </blockquote>
+
+<h1>Options</h1>
+<blockquote>
+	<table cellspacing="0" cellpadding="3" border="1">
+    	<tr>
+        	<th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+        	<td>$.fn.netPrice.defaultOptions.templateUrl</td>
+            <td>string</td>
+            <td>Path to the Template File (default: template.txt)</td>
+        </tr>        
+        <tr>
+        	<td>$.fn.netPrice.defaultOptions.currencyFormat</td>
+            <td>function</td>
+            <td>Function to convert float values to currency based format (default: 999,999.00)</td>
+        </tr>
+    </table>
+</blockquote>
+<h1>Public Variables:</h1>
+<blockquote><table cellspacing="0" cellpadding="3" border="1">
+	<tr>
+    	<th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.defaultOptions</td>
+        <td>Array[Object]</td>
+        <td>The default options for the calculator.</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.currentSlide</td>
+        <td>int</td>
+        <td>The Current Slide Number (Default is zero)</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.costs</td>
+        <td>Array[Object]</td>
+        <td>The Costs used by the calculator (Default is empty, loaded from template.txt)</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.awards</td>
+        <td>Array[Object]</td>
+        <td>The Awards used by the calculator (Default is empty, loaded from template.txt)</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.profile</td>
+        <td>Array[Object]</td>
+        <td>The Profiles used by the calculator (Default is empty, loaded from template.txt)</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.residency </td>
+        <td>Array[Object]</td>
+        <td>The Residency values used by the calculator (Default is empty, loaded from template.txt)</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.totalAward</td>
+        <td>float</td>
+        <td>The Total award amount from calculation (Default is zero)</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.totalCost</td>
+        <td>float</td>
+        <td>The Total Cost of Attendance value from calculation (Default is zero)</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.template</td>
+        <td>string</td>
+        <td>The formated template used by the calculator</td>
+    </tr>
+    <tr>
+    	<td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table></blockquote>
+
+<h1>Public Methods</h1>
+<blockquote><table cellspacing="0" cellpadding="3" border="1">
+	<tr>
+    	<th>Name</th>
+        <th>Description</th>
+        <th>Returns</th>
+    </tr>
+    
+    <tr>
+    	<td>$.fn.netPrice.gotoSlide(idx)</td>
+        <td>Displays the Slide Number to the one specified by idx (zero-based)</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.nextSlide()</td>
+        <td>Advances the current slide by one each time it is called until $(".netprice_slide").length is reached</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.previousSlide()</td>
+        <td>Reduces the current slide by one each time it is called until zero (0) is reached</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.costByCode(code)</td>
+        <td>Returns an array of cost objects based on the residency code value provided</td>
+        <td>Array[cost]</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.totalByCode(code)</td>
+        <td>Returns the total cost value of the costs objects identified by the residency code value provided</td>
+        <td>Float</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.getCost(name,code)</td>
+        <td>Returns the cost value of the cost object matching the name and residency code provided</td>
+        <td>Float</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.getResidency(code)</td>
+        <td>Returns the residency Object identified by the residency code</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.updateResidencyLabel()</td>
+        <td>Updates the &lt;RESIDENCYLABEL/&gt; tag with the $.fn.netPrice.residency.label text</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.updateCOA()</td>
+        <td>Updates the &lt;COSTS&gt;&lt;/COSTS&gt; tag set with the formatted costs and amounts</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.updateNeed()</td>
+        <td>Updates the &lt;NEED&gt;&lt;/NEED&gt; tag set with the calculated need values</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.updateProfileLabel()</td>
+        <td>Updates the &lt;PROFILELABEL/&gt; tag with the selected profile.name</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.updateAward()</td>
+        <td>Updates the &lt;AWARDS&gt;&lt;/AWARDS&gt; tag set with the calculated awards</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.updateEFCValue()</td>
+        <td>Updates the &lt;EFCVALUE/&gt; tag with the user-entered EFC value</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.updateNetPrice()</td>
+        <td>Updates the &lt;NETPRICE/&gt;, &lt;TOTAL/&gt;, and &lt;AWARDTOTAL&gt; tags with the calculated values</td>
+        <td>Object</td>
+    </tr>
+    <tr>
+    	<td>$.fn.netPrice.update()</td>
+        <td>Runs all Update methods</td>
+        <td>Object</td>
+    </tr>
+</table>	</blockquote>
+</p>
+</body>
+</html>
