@@ -63,17 +63,19 @@ included in the package.
 </p>
 
 <h3>Using Default Template:</h3>
-<p>
+<pre>
 $("#calculator").netPrice();
-</p>
+</pre>
 <p>
 <h3>Using a custom template file</h3>
 <p>
-$("#calculator").netPrice(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;templateURL:[path to template]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;);
+<pre>
+$("#calculator").netPrice(
+                            {
+                            templateURL:[path to template]
+                            }
+                          );
+</pre>
 </p>
 <h3>Restrictions:</h3>
 <p>
@@ -93,17 +95,16 @@ The template must have at least 1 element with the netprice_slide class.  This i
 			&lt;EFCVALUE/&gt; - This will display the value currently entered in the EFC Field<hr/>
 			&lt;PROFILE&gt;&lt;/PROFILE&gt; - This tag set will contain the Profile Selection options.  These options can be customized
 								  to your organization using an Array of profile objects.<br/>
-                                  <blockquote>
 								  <strong>Profile Array Example:</strong> <br/>
-								  profile[0]={<blockquote>
-                                  			   <strong>name</strong>:"Profile 1"<br/>
-								  			  ,<strong>number</strong>:1<br/>
-								  			  ,<strong>gpa</strong>:{min:4.00,max:4.00}<br/>
-								  			  ,<strong>sat</strong>:{min:1360,max:1600}<br/>
-								  			  ,<strong>act</strong>:{min:31,max:36}<br/>
-								  			  ,<strong>checked</strong>:true<br/>
-								  };<br/>
-                                  </blockquote>
+                                  <pre>
+profile[0]={name:"Profile 1"
+         ,number:1
+         ,gpa:{min:4.00,max:4.00}
+         ,sat:{min:1360,max:1600}
+         ,act:{min:31,max:36}
+         ,checked:true
+         };
+                                  </pre>
                                   <strong>Object Definition:</strong><br/>
 								  <strong>name (string)</strong> - Name of the profile to be displayed in the legend of the fieldset<br/>
 								  <strong>number (int)</strong> - Used to identify the profile number, currently unused but may be necessary in future releases<br/>
@@ -130,15 +131,15 @@ The template must have at least 1 element with the netprice_slide class.  This i
 									  to your organization using an Array of Residency Objects.<br/>
                                       <blockquote>
 									<strong>Residency Array Example:</strong><br/>
-										residency[0] = {<br/>
-                                        	<blockquote>
-														<strong>name</strong>:'residency'<br/>
-														,<strong>id</strong>:'instate'<br/>
-														,<strong>value</strong>:'UNGRA1'<br/>
-														,<strong>label</strong>:'Residing in the state of Michigan'<br/>
-														,<strong>checked</strong>:true<br/>
-														};<br/>
-                                            </blockquote>
+										<pre>
+residency[0] = {
+                name:'residency'
+                ,id:'instate'
+                ,value:'UNGRA1'
+                ,label:'Residing in the state of Michigan'
+                ,checked:true
+                };
+                                        </pre>
                                         <strong>Residency Object Description</strong><br/>
 										<strong>name (string)</strong> - The name of the radio button element used to select the option<br/>
 										<strong>id (string}</strong> - The ID of the radio button, for future development<br/>
@@ -151,23 +152,22 @@ The template must have at least 1 element with the netprice_slide class.  This i
   <p>&lt;COSTS&gt;&lt;/COSTS&gt; - This tag set is used to define the costs associated with the net price of a university.  You can customize this
 							  using an array of cost objects.
   </p>
-  <p><strong>costs array example:</strong><strong><br />
-  </strong>costs = [
-  </p>
-  <blockquote>
-    <p><br />
-      {
-      <br />
-      <strong>"name"</strong>:"BOOK"<br />
-      <strong>,"cost":</strong>"1200"<br />
-      ,<strong>"code":</strong>"UNGRA1"<br />
-      ,<strong>"label":</strong>"Books & Supplies"<br />
-      <strong>,"description"</strong>:"The estimated cost of Books averaged over a 4 year period"<br />
-    }</p>
-  </blockquote>
-  <p><br />
-    ]      </p>
-<p><strong>name (string) </strong>- The name of the cost, used when looking up costs using $.fn.netprice.getCost([cost.name],[residency.value]) <br />
+  <p><strong>costs array example:</strong><br />
+  <pre>
+  costs = [
+            {
+             "name":"BOOK"
+             ,"cost":"1200"
+             ,"code":"UNGRA1"
+             ,"label":"Books & Supplies"
+             ,"description":"The estimated cost of Books averaged over a 4 year period"
+            }
+          ]
+  </pre>
+ </p>
+<p>
+<strong>Cost Object Definition</strong><br/>
+<strong>name (string) </strong>- The name of the cost, used when looking up costs using $.fn.netprice.getCost([cost.name],[residency.value]) <br />
     <strong>cost (float) </strong>- the actual cost of the item for a complete school year <br />
     <strong>code (string)</strong> - Used to seperate costs based on residency.  The value of the residency object determines which cost is displayed
     label (string) - The text that is displayed on the screen when the cost has been selected <br />
@@ -178,53 +178,36 @@ The template must have at least 1 element with the netprice_slide class.  This i
 <hr />
 <p>&lt;AWARDS&gt;&lt;/AWARDS&gt; - This tag will display the award values based on the calculations provided.  This can be customized using an array
 	    of award objects.  During calculation all awards defined between these tags will be listed.    </p>
-<p><strong>Award Array Example:    </strong></p>
-<p>award[0] = { </p>
-<blockquote>
-  <p><strong>name</strong>:"Merit"
-    <br />
-    ,<strong>description</strong>:"Based on a student's academic, artistic, athletic or other abilities, and often factor in an applicant's extracurricular activities and community service record. The most common merit-based scholarships, awarded by either private organizations or directly by a student's intended college, recognize academic achievement or high scores on standardized tests"
-    ,<br />
-    <strong>rule</strong>:function(efc,profile,residency){ </p>
-  <blockquote>
-    <p> var retval = 0;<br />
-switch(parseInt(profile)){</p>
-    <blockquote>
-      <p> case 1:
-        case 2:        <br />
-        &nbsp;&nbsp;retval = 15000;
-        <br />
-        break;
-        <br />
-        case 3:
-        <br />
-        case 4:
-        <br />
-        &nbsp;&nbsp;retval = 14000;
-        <br />
-        break;
-        <br />
-        case 5:
-        <br />
-        case 6:
-        <br />
-        case 7:
-        <br />
-        &nbsp;&nbsp;retval = 13000;
-        <br />
-        break;
-        <br />
-        case 8:
-        <br />
-        &nbsp;&nbsp;retval = 2000;<br />
-break; </p>
-</blockquote>
-    <p>}
-      return retval;
-      } </p>
-  </blockquote>
-</blockquote>
-<p>}; </p>
+<p><strong>Award Array Example:    </strong>
+	<pre>
+award[0] = {
+            name:"Merit"
+            ,description:"Based on a student's academic, artistic, athletic or other abilities, and often factor in an applicant's extracurricular activities and community service record. The most common merit-based scholarships, awarded by either private organizations or directly by a student's intended college, recognize academic achievement or high scores on standardized tests"
+            ,rule:function(efc,profile,residency){
+                                    var retval = 0;
+                                    switch(parseInt(profile)){
+                                        case 1:
+                                        case 2:
+                                            retval = 15000;
+                                            break;
+                                        case 3:
+                                        case 4:
+                                            retval = 14000;
+                                            break;
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                            retval = 13000;
+                                            break;
+                                        case 8:
+                                            retval = 2000;
+                                            break;
+                                    }
+                                    return retval;
+                                }
+            };
+    </pre>
+</p>
 <p><strong>Award Object Definition:</strong></p>
 <p><strong>name (string):</strong> The name of the award as it will be displayed to the end user  <br />
   <strong>description (string):</strong> A short description of the award that will appear when the name is clicked
