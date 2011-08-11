@@ -1,0 +1,57 @@
+@charset "utf-8";
+body{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:10pt;
+}
+#netprice_container{
+	width:800px;
+	margin:auto;
+	background-color:#f0f0f0;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	padding:5px;
+}
+#netprice_container .title{
+	background-color:#000099;
+	color:#fff;
+	font-weight:bold;
+	font-size:16pt;
+	padding:5px;
+}
+#netprice_container .required{
+	color:#ff0000;
+}
+#netprice_container fieldset{
+	width:44%;
+	float:left;
+}
+#netprice_container th{
+	text-align:right;	
+}
+#netprice_container th p{
+	font-size:10pt;
+	font-weight:normal;
+}
+#netprice_container legend{
+	font-weight:bold;
+	font-size:16pt;
+}
+#netprice_container td{
+		text-align:right;
+}
+#netprice_container .cost-value{
+	border-bottom:dotted 2px #ccc;	
+}
+#netprice_container .cost-total{
+	font-weight:bold;
+	border-top:double 2px #000;
+}
+#netprice .alignleft{
+	float:left;
+}
+#netprice .alignright{
+	float:right;
+}
+#netprice .clear{
+	clear:both;
+}

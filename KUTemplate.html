@@ -1,0 +1,518 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Net Price Estimator - Kettering University</title>
+
+</head>
+
+
+
+<body>
+
+<div id="netprice_container">
+
+	<div class="title">Net Price Estimator - Kettering University</div>
+
+    <div class="netprice_nav">
+
+    	<input type="button" onclick="$.fn.netPrice.previousSlide()" value="Previous"/>
+
+        <input type="button" onclick="$.fn.netPrice.nextSlide()" value="Next"/>
+
+    </div>
+
+    <div id="netprice_slides">
+
+    	<div id="netprice_slide0" class="netprice_slide">
+
+            <h2>Expected Family Contribution</h2>
+
+            <p>
+
+                To use this Award Estimator, you will be required to visit the <a href="https://fafsa4caster.ed.gov/F4CApp/spring/login?locale=" target="_blank">FAFSA4caster</a> website to obtain your <strong>Expected Family Contribution (EFC)</strong>.
+
+                This is <strong>NOT</strong> what your family will actually be contributing, but rather a calculation as to what your family is expected to contribute.  This process takes approximately 30 minutes.<br>
+
+                <br>
+
+                <em>Note: An EFC Value of zero (0) will result in the most discounted tuition rate</em>
+
+                </p><ul>
+
+                    <li><a href="https://fafsa4caster.ed.gov/F4CApp/spring/login?locale=" target="_blank">FAFSA4caster</a><br>
+
+                    <span class="fineprint"><a href="https://fafsa4caster.ed.gov/F4CApp/spring/login?locale=" target="_blank">http://www.fafsa4caster.ed.gov/F4CApp/index/index.jsf</a></span></li>
+
+                </ul>
+
+            <p></p>
+
+            <p>
+
+                <strong>Enter your EFC Value:<EFCVALUE/><span class="required">*</span></strong>
+
+            </p>
+
+        </div>
+
+        <div id="netprice_slide1" class="netprice_slide">
+
+            <div id="acaprofileform_err" class="notification"></div>
+
+            <h2>Academic Profile Selection</h2>
+
+            <p>
+
+                The next step is to indicate which profile best matches your academic performance from the table below:
+
+            </p>
+
+            <PROFILE>
+
+                profile[0]={name:"Profile 1",number:1,gpa:{min:4.00,max:4.00},sat:{min:1360,max:1600},act:{min:31,max:36},checked:true};
+
+                profile[1]={name:"Profile 2",number:2,gpa:{min:3.60,max:3.99},sat:{min:1440,max:1600},act:{min:33,max:36},checked:false};
+
+                profile[2]={name:"Profile 3",number:3,gpa:{min:4.00,max:4.00},sat:{min:1090,max:1350},act:{min:24,max:30},checked:false};
+
+                profile[3]={name:"Profile 4",number:4,gpa:{min:3.60,max:3.99},sat:{min:1290,max:1430},act:{min:29,max:32},checked:false};
+
+                profile[4]={name:"Profile 5",number:5,gpa:{min:3.20,max:3.59},sat:{min:1290,max:1600},act:{min:29,max:36},checked:false};
+
+                profile[5]={name:"Profile 6",number:6,gpa:{min:3.20,max:3.99},sat:{min:1090,max:1600},act:{min:24,max:36},checked:false};
+
+                profile[6]={name:"Profile 7",number:7,gpa:{min:3.00,max:3.00},sat:{min:1090,max:1600},act:{min:24,max:36},checked:false};
+
+                profile[7]={name:"Profile 8",number:8,gpa:{min:2.70,max:4.00},sat:{min:1020,max:1600},act:{min:22,max:36},checked:false};
+
+            </PROFILE>
+
+            <br style="clear:both">
+
+        </div>
+
+        <div id="netprice_slide2" class="netprice_slide">
+
+                <h2>Residency</h2>
+
+                <p>
+
+                    Please identify your current residency status:
+
+                    <br>
+
+                <RESIDENCY>
+
+                	residency[0] = {name:'residency',id:'instate',value:'UNGRA1',label:'Residing in the state of Michigan',checked:true};
+
+                    residency[1] = {name:'residency',id:'outstate',value:'UNGRA2',label:'Residing in another state',checked:false};
+
+                </RESIDENCY>
+
+                </p>
+
+            </div>
+
+       </div>
+
+       <div id="netprice_slide3" class="netprice_slide">
+
+       	<p>
+
+			This estimate of an award is based on a student <strong><RESIDENCYLABEL/></strong>, having an EFC of <strong><EFCVALUE></strong>, 
+
+            and matching the criteria of <strong><PROFILELABEL/></strong>.
+
+            Any changes in the data elements you had to provide on the FASFA4caster will likely calculate a different EFC and a
+
+            different award.
+
+        </p>
+
+        <p>
+
+            The award estimate is based upon our most recent packaging parameters and federal/state appropriations.  
+
+            Any future changes made by the federal government to the methodology used to calculate the EFC and/or
+
+            federal/state appropriations for the funds listed could result in a different award.  Also, any scholarships you are
+
+            awarded would need to be considered as part of your award and could reduce the award.
+
+        </p>
+
+        <h3>Estimated Annual Cost of Attendance</h3>
+
+        <COSTS>
+
+            costs = [
+
+                    {"name":"BOOK","cost":"1200","code":"UNGRA1","label":"Books & Supplies","description":"The estimated cost of Books averaged over a 4 year period"}
+
+                    ,{"name":"MISC","cost":"2955","code":"UNGRA1","label":"Miscellaneous","description":"The estimated cost of incidental living expenses"}
+
+                    ,{"name":"RB","cost":"6660","code":"UNGRA1","label":"Room & Board","description":"The estimated cost of Room and Board"}
+
+                    ,{"name":"TRAN","cost":"3659","code":"UNGRA1","label":"Transportation","description":"The estimated cost to travel to and from campus"}          
+
+                    ,{"name":"TUIT","cost":"29988","code":"UNGRA1","label":"Tuition & Fees","description":"The tuition rate and associated fees"}
+
+                    ,{"name":"BOOK","cost":"1200","code":"UNGRA2","label":"Books & Supplies","description":"The estimated cost of Books averaged over a 4 year period"}
+
+                    ,{"name":"MISC","cost":"2955","code":"UNGRA2","label":"Miscellaneous","description":"The estimated cost of incidental living expenses"}
+
+                    ,{"name":"RB","cost":"6660","code":"UNGRA2","label":"Room & Board","description":"The estimated cost of Room and Board"}
+
+                    ,{"name":"TRAN","cost":"4542","code":"UNGRA2","label":"Transportation","description":"The estimated cost to travel to and from campus"}
+
+                    ,{"name":"TUIT","cost":"29988","code":"UNGRA2","label":"Tuition & Fees","description":"The tuition rate and associated fees"}
+
+                    ]
+
+        </COSTS>
+
+        <h3>Need Calculation</h3>
+
+        <NEED/>
+
+        <h3>Estimated Annual Award Eligibility</h3>
+
+        <AWARDS>
+
+            award[0] = {name:"Merit"
+
+                        ,description:"Based on a student's academic, artistic, athletic or other abilities, and often factor in an applicant's extracurricular activities and community service record. The most common merit-based scholarships, awarded by either private organizations or directly by a student's intended college, recognize academic achievement or high scores on standardized tests"
+
+                        ,rule:function(efc,profile,residency){
+
+                                                var retval = 0;
+
+                                                switch(parseInt(profile)){
+
+                                                    case 1:
+
+                                                    case 2:
+
+                                                        retval = 15000;
+
+                                                        break;
+
+                                                    case 3:
+
+                                                    case 4:
+
+                                                        retval = 14000;
+
+                                                        break;
+
+                                                    case 5:
+
+                                                    case 6:
+
+                                                    case 7:
+
+                                                        retval = 13000;
+
+                                                        break;
+
+                                                    case 8:
+
+                                                        retval = 2000;
+
+                                                        break;
+
+                                                }
+
+                                                return retval;
+
+                                            }
+
+            };
+
+            award[1] = {id:"PELL"
+
+                        ,name:"PELL Grant"
+
+                        ,description:"A federal grant that provides funds of up to $5,500 (2010-11) based on the student's financial need."
+
+                        ,rule:function(efc,profile,residency){
+
+                            var retval = 0;
+
+                            if(efc == 0){
+
+                                retval = 5550;
+
+                            }else if(efc >= 4401 && efc <= 4617){
+
+                                retval = 1176;
+
+                            }else if (efc > 4617){
+
+                                retval = 0;
+
+                            }else{
+
+                                retval = 5500 - (((efc - 1) / 100)*100);
+
+                            }
+
+                            return retval;
+
+                        }    
+
+            };
+
+            award[2] = {id:"SEOG"
+
+                        ,name:"Supplemental Educational Opportunity Grant (SEOG)"
+
+                        ,description:"Federal grant program for undergraduate students with exceptional need. To qualify, a student must also be a recipient of a Pell Grant."
+
+                        ,rule:function(efc,profile,residency){
+
+                            var v_return = 0;
+
+                            if(efc >= 0 && efc <=500){
+
+                                v_return = 2000;
+
+                            }else if(efc > 500 && efc <= 1000){
+
+                                v_return = 1500;
+
+                            }else if(efc > 1000 && efc <= 2000){
+
+                                v_return = 1000;
+
+                            }
+
+                            return v_return;
+
+                        }
+
+            };
+
+            award[3] = {id:"KUOG"
+
+                        ,name:"Kettering University Opportunity Grant (KUOG)"
+
+                        ,description:"Awarded based on financial need."
+
+                        ,rule:function(efc,profile,residency){
+
+                                                    var merit = award[0].rule(efc,profile,residency);
+
+                                                    var pell = award[1].rule(efc,profile,residency);
+
+                                                    var seog = award[2].rule(efc,profile,residency);
+
+                                                    var coa = $.fn.netPrice.totalByCode(residency);
+
+                                                    var need = ($.fn.netPrice.getCost('TUIT',residency).cost + $.fn.netPrice.getCost('RB',residency)).cost - efc;
+
+                                                    var need_eligable = 0;
+
+                                                    var returnVal = 0;
+
+                                                    if (merit == 14000 && need > 14000) {
+
+                                                       need_eligable = 2000;
+
+                                                    }
+
+                                                    if (merit == 13000 && (need > 7500 && need < 12001)) {
+
+                                                       need_eligable = 3000;
+
+                                                    }
+
+                                                    if (merit == 13000 && need > 12000) {
+
+                                                       need_eligable = 4000;
+
+                                                    }
+
+                                                    if (merit == 2000 && need > 0) {
+
+                                                       need_eligable = 5000;
+
+                                                    }
+
+                                                    if (merit == 0 && need > 0) {
+
+                                                       need_eligable = 5000;
+
+                                                    }
+
+                                                    returnVal = need_eligable - pell - seog;
+
+                                                    if (returnVal <= 0){
+
+                                                       return 0;
+
+                                                    }else{
+
+                                                       return returnVal;
+
+                                                    }
+
+                    }
+
+            };
+
+            award[4] = {id:"FWS"
+
+            			,name:"Federal Work Study (FWS)"
+
+                        ,description:"Federal Work Study (FWS)"
+
+                        ,rule:function(efc,profile,residency){
+
+                            var coa = $.fn.netPrice.totalByCode(residency);
+
+                            var merit = award[0].rule(efc,profile,residency);
+
+                            var pell = award[1].rule(efc,profile,residency);
+
+                            var seog = award[2].rule(efc,profile,residency);
+
+                            var kuog = award[3].rule(efc,profile,residency);
+
+                            var need = coa - efc - merit - pell - seog - kuog;
+
+                            if(need >= 1201){
+
+                                return 1200;
+
+                            }else{
+
+                                if(need >=0){
+
+                                    return 1200 - need;
+
+                                }else{
+
+                                    return 0;
+
+                                }
+
+                            }
+
+                        }
+
+            };
+
+            award[5] = {id:"SUBSIDIZED"
+
+                        ,name:"Subsidized Stafford Loan"
+
+                        ,description:"Subsidized loans are awarded based on financial need - the government pays the interest on the loan while the student is in school, during the six-month grace period and during any deferment periods."
+
+                        ,rule:function(efc,profile,residency){
+
+                            var coa = $.fn.netPrice.totalByCode(residency);
+
+                            var merit = award[0].rule(efc,profile,residency);
+
+                            var pell = award[1].rule(efc,profile,residency);
+
+                            var seog = award[2].rule(efc,profile,residency);
+
+                            var kuog = award[3].rule(efc,profile,residency);
+
+                            var need = coa - efc - merit - pell - seog - kuog;
+
+                            if(need >= 3500){
+
+                                return 3500;
+
+                            }else{
+
+                                if(need >= 0){
+
+                                    return 3500 - need;
+
+                                }else{
+
+                                    return 0;
+
+                                }
+
+                            }
+
+                        }
+
+            };
+
+            award[6] = {id:"UNSUBSIDIZED"
+
+                        ,name:"Unsubsidized Stafford Loan"
+
+                        ,description:"Unsubsidized loans are not based on financial need and may be used to finance the family contribution. The borrower is responsible for the interest on an unsubsidized loan from the date the loan is disbursed, even while the student is still in school. Students may avoid paying the interest while they are in school by capitalizing the interest, which increases the loan amount."
+
+                        ,rule:function(efc,profile,residency){
+
+                            var coa = $.fn.netPrice.totalByCode(residency);
+
+                            var merit = award[0].rule(efc,profile,residency);
+
+                            var pell = award[1].rule(efc,profile,residency);
+
+                            var seog = award[2].rule(efc,profile,residency);
+
+                            var kuog = award[3].rule(efc,profile,residency);
+
+                            var need = coa - efc - merit - pell - seog - kuog;
+
+                            if(need >= 2000){
+
+                                return 2000;
+
+                            }else{
+
+                                if(need >= 0){
+
+                                    return 2000 - need;
+
+                                }else{
+
+                                    return 0;
+
+                                }
+
+                            }
+
+                        }
+
+            };
+
+		</AWARDS>    
+
+        <p><strong>Your Estimated Net Price is: <NETPRICE/> </strong><br>
+
+        <strong>Net Price = Cost of Attendance less Estimated Awards (<TOTAL/> - <AWARDTOTAL/> = <NETPRICE/>)</strong></p>
+
+        <p style="border-top:1px solid #CCCCCC;padding-top:10px;">
+
+        
+
+    Kettering University: An Affordable Education that Works! Transportation and miscellaneous costs are included in total cost of attendance recognizing "reasonable costs" associated with your co-op placement.  Costs are unique to particular co-op experiences and many students will incur lower co-op related expenses. On average, students earn $40,000 - $65,000 over the course of the program. Wages earned from co-op or other experiential learning experiences exceed co-op related expenses, and excess earnings may be applied to your educational costs above and beyond all sources of financial aid. Click here to review Kettering's <a href="http://co-op.kettering.edu/docs/BenefSurvey.pdf">Co-op Wage and Benefits Survey</a>.
+
+    </p>
+
+    </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
