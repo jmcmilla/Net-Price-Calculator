@@ -162,7 +162,7 @@
 					return $.fn.netPrice;
 				}
 				$.fn.netPrice.defaultOptions = {
-					templateURL:'/toolbox/javascripts/ku_calculator/netprice_template.html',
+					templateURL:'template.txt',
 					currencyFormat:function(val){
 						return '$' + (parseFloat(val)).formatMoney(2,'.',',');	
 					}
