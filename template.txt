@@ -1,4 +1,11 @@
-
+<!--
+template.txt
+Author: James R. McMillan
+Copyright 2011, Kettering University - All Rights Reserved
+Purpose: This file is used by netprice.js to generate the user interface for the calculator.  See README for further definition.			
+Change History:
+8-10-2011 - Initial Release
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,7 +25,10 @@
 <div id="netprice_container">
 
 	<div class="title">Net Price Estimator</div>
-
+	<!-- 
+	Navigation Bar for moving between slides
+	
+	-->
     <div class="netprice_nav">
 		<div class="alignleft">
 			<input type="button" onclick="$.fn.netPrice.previousSlide()" value="Previous"/>
@@ -56,7 +66,7 @@
 
             <p>
 
-                <strong>Enter your EFC Value:<EFCVALUE/><span class="required">*</span></strong>
+                <strong>Enter your EFC Value:<EFCFIELD/><span class="required">*</span></strong>
 
             </p>
 
@@ -126,7 +136,7 @@
 
        	<p>
 
-			This estimate of an award is based on a student <strong><RESIDENCYLABEL/></strong>, having an EFC of <strong><EFCVALUE></strong>, 
+			This estimate of an award is based on a student <strong><RESIDENCYLABEL/></strong>, having an EFC of <strong><EFCVALUE/></strong>, 
 
             and matching the criteria of <strong><PROFILELABEL/></strong>.
 

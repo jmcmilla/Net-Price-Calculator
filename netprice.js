@@ -19,8 +19,8 @@
 					options = $.extend({}, $.fn.netPrice.defaultOptions,options);
 					function formatTemplate(){
 						var template = $.fn.netPrice.template;
-						if(template.indexOf("<EFCVALUE>")>0){
-							template = template.replace(/<EFCVALUE\/>/g, '<input type="text" id="efcValue" name="efcValue" class="netprice_input" value="0"/>');
+						if(template.indexOf("<EFCFIELD/>")>0){
+							template = template.replace(/<EFCFIELD\/>/g, '<input type="text" id="efcValue" name="efcValue" class="netprice_input" value="0"/>');
 						}
 						if(template.indexOf("<COSTS>")>0 && template.indexOf("</COSTS>") > 0){
 							var costs = new Array();

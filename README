@@ -1,0 +1,179 @@
+/*!
+ * Net Price Calculator v1.0
+ * http://www.kettering.edu/
+ *
+ * Author: James McMillan
+ * Copyright 2011, Kettering University
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://en.wikipedia.org/wiki/MIT_License
+ * http://en.wikipedia.org/wiki/GNU_General_Public_License
+ *
+ * Date: Mon Aug l 09:43:22 2011 -0500
+ */
+
+The Net Price Calculator project stems from a government mandate that all universities provide a web accessible calculator that not only
+defines the tuition of the university but other associated costs as well (ie: Books, Transportation, Room & Board)
+
+Files:
+jquery.js - This plugin uses the jQuery framework version 1.3.1
+netprice.js - The actual plugin logic
+netprice.css - The Stylesheet for formatting the calculator
+template.txt - The Template used by the plugin to pull in customized values and the User Interface
+demo.html - The demonstration application for this plugin
+
+Initialization:
+The plugin has one default option, the location of the template file.  The default value for this option is the template.txt file that is
+included in the package.
+
+Using Default Template:
+$("#calculator").netPrice();
+
+Using server-side template file
+$("#calculator").netPrice(
+							{
+							 templateUrl:[path to template]
+							 }
+						  );
+
+Restrictions:
+In order for the calculator to work correctly the Allow-Control-Orgin [template domain] must be enabled on the remote server
+if a template file from a different domain is used.
+
+The template must have at least 1 element with the netprice_slide class.  This is what is used for the navigational buttons.
+
+
+template.txt Important Notes:
+		 The formatting is standard html with the exception of a few custom tags that have special meaning to the calculator:
+			<EFCFIELD/> - This will be the location where the EFC Input box will appear
+			<EFCVALUE/> - This will display the value currently entered in the EFC Field
+			<PROFILE></Profile> - This tag set will contain the Profile Selection options.  These options can be customized
+								  to your organization using an Array of profile objects.
+								  Profile Array Example: 
+								  profile[0]={name:"Profile 1"
+											 ,number:1
+											 ,gpa:{min:4.00,max:4.00}
+											 ,sat:{min:1360,max:1600}
+											 ,act:{min:31,max:36}
+											 ,checked:true
+											 };
+								  name (string) - Name of the profile to be displayed in the legend of the fieldset
+								  number (int) - Used to identify the profile number, currently unused but may be necessary in future releases
+								  gpa (object) - The GPA Object identifies the values to display for the minimum and maximum values of the Grade Point Average for the profile
+									min (float)
+									max (float)
+								  sat (object) - The SAT Object identifies the values to display for the minimum and maximum values of the SAT Test Scores for the profile
+									min (float)
+									max (float)
+								  act (Object) - The ACT Object identifies the values to display for the minimum and maximum values of the ACT Test Scores for the profile
+									min (float)
+									max (float)
+								  checked (boolean) - if true then the radio button for this profile will be checked, if false it will not be checked.
+			<PROFILELABEL/> - This tag will contain the name value of the profile currently selected.
+			<RESIDENCY></RESIDENCY> - This tag set will contain an array of residency options.  These optins can be customized
+									  to your organization using an Array of Residency Objects.
+									Residency Array Example:
+										residency[0] = {
+														name:'residency'
+														,id:'instate'
+														,value:'UNGRA1'
+														,label:'Residing in the state of Michigan'
+														,checked:true
+														};
+										name (string) - The name of the radio button element used to select the option
+										id (string} - The ID of the radio button, for future development
+										value (string) - The value of the radio button element.  This serves as the link to the cost object described below.
+										label (string) - The text that will be displayed next to the radio button in the user interface
+										checked (boolean) - If true then the radio button will be checked by default.
+			<RESIDENCYLABEL/> - This tag will display the label value of the current residency object selected.
+			<COSTS></COSTS> - This tag set is used to define the costs associated with the net price of a university.  You can customize this
+							  using an array of cost objects.
+							  costs array example:
+							  costs = [
+										{
+										 "name":"BOOK"
+										 ,"cost":"1200"
+										 ,"code":"UNGRA1"
+										 ,"label":"Books & Supplies"
+										 ,"description":"The estimated cost of Books averaged over a 4 year period"
+										}
+									  ]
+							  name (string) - The name of the cost, used when looking up costs using $.fn.netprice.getCost([cost.name],[residency.value])
+							  cost (float) - the actual cost of the item for a complete school year
+							  code (string) - Used to seperate costs based on residency.  The value of the residency object determines which cost is displayed
+							  label (string) - The text that is displayed on the screen when the cost has been selected
+							  description (string) - Additional information that will appear when the label is clicked on.
+			<NEED/> - This tag will display the need calculation by totaling all of the costs and then subtracting the EFC value entered
+			<AWARDS></AWARDS> - This tag will display the award values based on the calculations provided.  This can be customized using an array
+								of award objects.  During calculation all awards defined between these tags will be listed.
+								Award Object Example:
+								award[0] = {
+											name:"Merit"
+											,description:"Based on a student's academic, artistic, athletic or other abilities, and often factor in an applicant's extracurricular activities and community service record. The most common merit-based scholarships, awarded by either private organizations or directly by a student's intended college, recognize academic achievement or high scores on standardized tests"
+											,rule:function(efc,profile,residency){
+																	var retval = 0;
+																	switch(parseInt(profile)){
+																		case 1:
+																		case 2:
+																			retval = 15000;
+																			break;
+																		case 3:
+																		case 4:
+																			retval = 14000;
+																			break;
+																		case 5:
+																		case 6:
+																		case 7:
+																			retval = 13000;
+																			break;
+																		case 8:
+																			retval = 2000;
+																			break;
+																	}
+																	return retval;
+																}
+											};
+								name (string): The name of the award as it will be displayed to the end user
+								description (string): A short description of the award that will appear when the name is clicked
+								rule (function): The logic that will return the awarded amount based on the EFC value, the Profile selected, and the residency selected
+												 the function must have all three inputs defined in the function even if they are not used.
+												 The return value should always be a numeric value
+								
+			<NETPRICE/> - This tag will be updated with the net price (cost of attendance - awards) after every calculation
+			<TOTAL> - The Total Costs will be updated here after every calculation
+			<AWARDTOTAL> - The total awards will be placed here after every calculation
+
+Constructor:
+	$('').netPrice(options)					Object			Initializes the netprice Plugin
+
+Options
+	$.fn.netPrice.defaultOptions.templateUrl		string			Path to the Template File (default: template.txt)
+	$.fn.netPrice.defaultOptions.currencyFormat		function		Function to convert float values to currency based format (default: 999,999.00)
+			
+Public Variables:
+	$.fn.netPrice.defaultOptions			Array[Object]	The default options for the calculator.
+	$.fn.netPrice.currentSlide				int				The Current Slide Number (Default is zero)
+	$.fn.netPrice.costs 					Array[Object]	The Costs used by the calculator (Default is empty, loaded from template.txt)
+	$.fn.netPrice.awards 					Array[Object]	The Awards used by the calculator (Default is empty, loaded from template.txt)
+	$.fn.netPrice.profile 					Array[Object]	The Profiles used by the calculator (Default is empty, loaded from template.txt)
+	$.fn.netPrice.residency  				Array[Object]	The Residency values used by the calculator (Default is empty, loaded from template.txt)
+	$.fn.netPrice.totalAward 				float			The Total award amount from calculation (Default is zero)
+	$.fn.netPrice.totalCost 				float			The Total Cost of Attendance value from calculation (Default is zero)
+	$.fn.netPrice.template					string			The formated template used by the calculator
+	
+Public Methods
+	$.fn.netPrice.gotoSlide(idx)			Displays the Slide Number to the one specified by idx (zero-based)
+	$.fn.netPrice.nextSlide()				Advances the current slide by one each time it is called until $(".netprice_slide").length is reached
+	$.fn.netPrice.previousSlide()			Reduces the current slide by one each time it is called until zero (0) is reached
+	$.fn.netPrice.costByCode(code)			Returns an array of cost objects based on the residency code value provided
+	$.fn.netPrice.totalByCode(code)			Returns the total cost value of the costs objects identified by the residency code value provided
+	$.fn.netPrice.getCost(name,code)		Returns the cost value of the cost object matching the name and residency code provided
+	$.fn.netPrice.getResidency(code)		Returns the residency Object identified by the residency code
+	$.fn.netPrice.updateResidencyLabel()	Updates the <RESIDENCYLABEL/> tag with the $.fn.netPrice.residency.label text
+	$.fn.netPrice.updateCOA()				Updates the <COSTS></COSTS> tag set with the formatted costs and amounts
+	$.fn.netPrice.updateNeed()				Updates the <NEED></NEED> tag set with the calculated need values
+	$.fn.netPrice.updateProfileLabel()		Updates the <PROFILELABEL/> tag with the selected profile.name
+	$.fn.netPrice.updateAward()				Updates the <AWARDS></AWARDS> tag set with the calculated awards
+	$.fn.netPrice.updateEFCValue()			Updates the <EFCVALUE/> tag with the user-entered EFC value
+	$.fn.netPrice.updateNetPrice()			Updates the <NETPRICE/>, <TOTAL/>, and <AWARDTOTAL> tags with the calculated values
+	$.fn.netPrice.update()					Runs all Update methods
+	
