@@ -14,17 +14,14 @@ Change History:
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>Net Price Estimator</title>
+<title>Net Price Calculator</title>
 
 </head>
 
 
 
 <body>
-
-<div id="netprice_container">
-
-	<div class="title">Net Price Estimator</div>
+	<div class="title">Net Price Calculator</div>
 	<!-- 
 	Navigation Bar for moving between slides
 	
@@ -36,6 +33,7 @@ Change History:
 		<div class="alignright">
 			<input type="button" onclick="$.fn.netPrice.nextSlide()" value="Next"/>
 		</div>
+		<br class="clear"/>
     </div>
 
     <div id="netprice_slides">
@@ -504,25 +502,18 @@ Change History:
 
             };
 
-		</AWARDS>    
-
+		</AWARDS> 
         <p><strong>Your Estimated Net Price is: <NETPRICE/> </strong><br>
-
         <strong>Net Price = Cost of Attendance less Estimated Awards (<TOTAL/> - <AWARDTOTAL/> = <NETPRICE/>)</strong></p>
-
-        <p style="border-top:1px solid #CCCCCC;padding-top:10px;">
-
-        
-
-    Kettering University: An Affordable Education that Works! Transportation and miscellaneous costs are included in total cost of attendance recognizing "reasonable costs" associated with your co-op placement.  Costs are unique to particular co-op experiences and many students will incur lower co-op related expenses. On average, students earn $40,000 - $65,000 over the course of the program. Wages earned from co-op or other experiential learning experiences exceed co-op related expenses, and excess earnings may be applied to your educational costs above and beyond all sources of financial aid. Click here to review Kettering's <a href="http://co-op.kettering.edu/docs/BenefSurvey.pdf">Co-op Wage and Benefits Survey</a>.
-
-    </p>
-
+    	<p style="border-top:1px solid #CCCCCC;padding-top:10px;">
+			Kettering University: An Affordable Education that Works! Transportation and miscellaneous costs are included in total cost of attendance recognizing "reasonable costs" associated with your co-op placement.  Costs are unique to particular co-op experiences and many students will incur lower co-op related expenses. On average, students earn $40,000 - $65,000 over the course of the program. Wages earned from co-op or other experiential learning experiences exceed co-op related expenses, and excess earnings may be applied to your educational costs above and beyond all sources of financial aid. Click here to review Kettering's <a href="http://co-op.kettering.edu/docs/BenefSurvey.pdf">Co-op Wage and Benefits Survey</a>.
+		</p>
+		<p class="center">
+			<input type="button" onclick="window.print()" value="Print"/>
+		</p>
     </div>
 
     </div>
-
-</div>
 
 </body>
 

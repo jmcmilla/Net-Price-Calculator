@@ -6,7 +6,8 @@ body{
 #netprice_container{
 	width:800px;
 	margin:auto;
-	background-color:#f0f0f0;
+	background-color:#fff;
+	border:1px solid #ccc;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
 	padding:5px;
@@ -16,6 +17,11 @@ body{
 	color:#fff;
 	font-weight:bold;
 	font-size:16pt;
+	padding:5px;
+}
+#netprice_container .netprice_nav{
+	border:solid 1px #ccc;
+	color:#fff;
 	padding:5px;
 }
 #netprice_container .required{
@@ -46,12 +52,24 @@ body{
 	font-weight:bold;
 	border-top:double 2px #000;
 }
-#netprice .alignleft{
+#netprice_container .alignleft{
 	float:left;
 }
-#netprice .alignright{
+#netprice_container .alignright{
 	float:right;
 }
-#netprice .clear{
+#netprice_container .clear{
 	clear:both;
+}
+#netprice_container .netprice_slide{
+	display:none;	
+}
+#netprice_container .center{
+	text-align:center;	
+}
+
+@media print{
+		#netprice_container .title{ display:none;}
+		#netprice_container .netprice_nav{ display:none;}
+		#netprice_container .screenOnly {display:none;}
 }
