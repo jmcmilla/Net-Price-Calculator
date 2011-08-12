@@ -33,7 +33,8 @@ body{
 		float:left;
 	}
 	#netprice_container th{
-		text-align:right;	
+		text-align:right;
+		cursor:help;
 	}
 	#netprice_container th p{
 		font-size:10pt;
