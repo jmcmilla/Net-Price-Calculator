@@ -6,21 +6,6 @@ Purpose: This file is used by netprice.js to generate the user interface for the
 Change History:
 8-10-2011 - Initial Release
 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<title>Net Price Calculator</title>
-
-</head>
-
-
-
-<body>
 	<div class="title">Net Price Calculator</div>
 	<!-- 
 	Navigation Bar for moving between slides
@@ -125,8 +110,6 @@ Change History:
                 </RESIDENCY>
 
                 </p>
-
-            </div>
 
        </div>
 
@@ -514,7 +497,3 @@ Change History:
     </div>
 
     </div>
-
-</body>
-
-</html>
