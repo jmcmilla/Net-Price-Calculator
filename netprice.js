@@ -19,8 +19,29 @@
 					options = $.extend({}, $.fn.netPrice.defaultOptions,options);
 					function formatTemplate(){
 						var template = $.fn.netPrice.template;
+						if(template.indexOf("<RESIDENCYLABEL/>")>0){
+							template = template.replace(/<RESIDENCYLABEL\/>/g,'<span class="RESIDENCYLABEL"></span>');	
+						}
+						if(template.indexOf("<PROFILELABEL/>")>0){
+							template = template.replace(/<PROFILELABEL\/>/g,'<span class="PROFILELABEL"></span>');	
+						}
+						if(template.indexOf("<NEED/>") > 0 ){
+							template = template.replace(/<NEED\/>/g,'<div class="NEED"></div>');	
+						}
 						if(template.indexOf("<EFCFIELD/>")>0){
 							template = template.replace(/<EFCFIELD\/>/g, '<input type="text" id="efcValue" name="efcValue" class="netprice_input" value="0"/>');
+						}
+						if(template.indexOf("<EFCVALUE/>")>0){
+							template = template.replace(/<EFCVALUE\/>/g, '<span class="EFCVALUE"></span>');	
+						}
+						if(template.indexOf("<TOTAL/>")>0){
+							template = template.replace(/<TOTAL\/>/g, '<span class="TOTAL"></span>');	
+						}
+						if(template.indexOf("<NETPRICE/>")>0){
+							template = template.replace(/<NETPRICE\/>/g,'<span class="NETPRICE"></span>');	
+						}
+						if(template.indexOf("<AWARDTOTAL/>")>0){
+							template = template.replace(/<AWARDTOTAL\/>/g,'<span class="AWARDTOTAL"></span>');	
 						}
 						if(template.indexOf("<COSTS>")>0 && template.indexOf("</COSTS>") > 0){
 							var costs = new Array();
@@ -36,6 +57,8 @@
 								return null;
 							}
 							template = template.substr(0,startp) + template.substr(endp);
+							template = template.replace(/<COSTS>/g,'<div class="COSTS">');
+							template = template.replace(/<\/COSTS>/g,'</div>');
 						}
 						if(template.indexOf("<AWARDS>")>0 && template.indexOf("</AWARDS>") > 0){
 								var award = new Array();
@@ -50,7 +73,9 @@
 									alert('Template Error evaluating Awards: ' + e);
 									return null;
 								}
-								template = template.substr(0,startp) + template.substr(endp);								
+								template = template.substr(0,startp) + template.substr(endp);	
+								template = template.replace(/<AWARDS>/g,'<div class="AWARDS">');
+								template = template.replace(/<\/AWARDS>/g,'</div>');
 						}
 						if(template.indexOf("<PROFILE>")>0 && template.indexOf("</PROFILE>")>0){
 							var profile = new Array();
@@ -89,8 +114,8 @@
 																	+'</fieldset>';
 													});
 							template = template.substr(0,startp) + profileTable + template.substr(endp);
-							template = template.replace(/<PROFILE>/g,'');
-							template = template.replace(/<\/PROFILE>/g,'');
+							template = template.replace(/<PROFILE>/g,'<div class="PROFILE">');
+							template = template.replace(/<\/PROFILE>/g,'</div>');
 							$.fn.netPrice.profile = profile;
 						}
 						if(template.indexOf("<RESIDENCY>") && template.indexOf("</RESIDENCY")){
@@ -106,8 +131,8 @@
 													  });
 							$.fn.netPrice.residency = residency;
 							template = template.substr(0,startp) + residencyTable + template.substr(endp);
-							template = template.replace(/<RESIDENCY>/g,'');
-							template = template.replace(/<\/RESIDENCY>/g,'');
+							template = template.replace(/<RESIDENCY>/g,'<div class="RESIDENCY">');
+							template = template.replace(/<\/RESIDENCY>/g,'</div>');
 						}
 						$.fn.netPrice.template = template;
 					}
@@ -116,7 +141,8 @@
 									   $('<div id="netprice_container"></div>').appendTo(element);
 									   $.get(options.templateURL,null,function(data){
 																						$.fn.netPrice.template = data; 
-																						formatTemplate();$("#netprice_container").html($.fn.netPrice.template)
+																					 	formatTemplate();
+																						document.getElementById("netprice_container").innerHTML = $.fn.netPrice.template;
 																						$("#efcValue").change(function(){
 																													   	$.fn.netPrice.update();
 																													   });
@@ -214,7 +240,7 @@
 				}
 				$.fn.netPrice.updateResidencyLabel = function(){
 					var residency = $.fn.netPrice.getResidency($('input:radio[name=residency]:checked').val());
-					$("RESIDENCYLABEL").html(residency.label);
+					$('.RESIDENCYLABEL').html(residency.label);
 					return $.fn.netPrice;
 				}
 				$.fn.netPrice.updateCOA = function(){
@@ -230,9 +256,9 @@
 																+'	<td style="width:49%" class="cost-value">' + $.fn.netPrice.defaultOptions.currencyFormat(val.cost) + '</td>'
 																+'</tr>';
 												  });
-							costTable += "<tr><th>Total cost of Attendance</th><td class=\"cost-total\"><COA>" + $.fn.netPrice.defaultOptions.currencyFormat(totalCosts) + "</COA></td></tr>"
+							costTable += "<tr><th>Total cost of Attendance</th><td class=\"cost-total\">" + $.fn.netPrice.defaultOptions.currencyFormat(totalCosts) + "</td></tr>"
 										+"</table>";
-						$("COSTS").html(costTable);
+						$(".COSTS").html(costTable);
 						$.fn.netPrice.totalCost = totalCosts;
 						return this;
 				}
@@ -252,15 +278,21 @@
 									+'</tr>'
 									+'<tr>'
 									+'	<th>Need</th>'
-									+'	<td class="cost-total"><NEED>' + $.fn.netPrice.defaultOptions.currencyFormat(coa - efc) + '</NEED></td>'
+									+'	<td class="cost-total">' + $.fn.netPrice.defaultOptions.currencyFormat(coa - efc) + '</td>'
 									+'</tr>'
 									+'</table>';
-					$("NEED").html(needTable);
+					$(".NEED").html(needTable);
 					return $.fn.netPrice;
 				}
 				$.fn.netPrice.updateProfileLabel = function(){
-					var idx = $("input:radio[name=profile]:checked").val();
-					$("PROFILELABEL").html($.fn.netPrice.profile[idx].name);
+					try{
+						var idx = $("input:radio[name=profile]:checked").val();
+						if($.fn.netPrice.profile[idx]){
+							$(".PROFILELABEL").html($.fn.netPrice.profile[idx].name);
+						}
+					}catch(e){
+						alert(e);
+					}
 					return $.fn.netPrice;
 				}
 				$.fn.netPrice.updateAward = function(){
@@ -280,23 +312,23 @@
 																		  +'	<td class="cost-value" style="width:49%">' + $.fn.netPrice.defaultOptions.currencyFormat(amt) + '</td>'
 																		  +'</tr>'
 														 });
-					awardTable += '<tr><th>Total Estimated Award</th><td class="cost-total"><AWARDTOTAL>' + $.fn.netPrice.defaultOptions.currencyFormat(totalAward) + '<AWARDTOTAL></td></tr>'
+					awardTable += '<tr><th>Total Estimated Award</th><td class="cost-total">' + $.fn.netPrice.defaultOptions.currencyFormat(totalAward) + '</td></tr>'
 								+'</table>';
-					$("AWARDS").html(awardTable);
+					$(".AWARDS").html(awardTable);
 					$.fn.netPrice.totalAward = totalAward;
 					return $.fn.netPrice;
 				}
 				$.fn.netPrice.updateEFCValue = function(){
-						$("EFCVALUE").html($.fn.netPrice.defaultOptions.currencyFormat(parseFloat($("#efcValue").val())));
+						$(".EFCVALUE").html($.fn.netPrice.defaultOptions.currencyFormat(parseFloat($("#efcValue").val())));
 						return $.fn.netPrice;
 				}
 				$.fn.netPrice.updateNetPrice = function(){
 						var coa = parseFloat($.fn.netPrice.totalCost);
 						var awardvalue = parseFloat($.fn.netPrice.totalAward);
 						var price = $.fn.netPrice.defaultOptions.currencyFormat(coa - awardvalue);
-						$("NETPRICE").html(price);
-						$("TOTAL").html($.fn.netPrice.defaultOptions.currencyFormat(coa));
-						$("AWARDTOTAL").html($.fn.netPrice.defaultOptions.currencyFormat(awardvalue));
+						$(".NETPRICE").html(price);
+						$(".TOTAL").html($.fn.netPrice.defaultOptions.currencyFormat(coa));
+						$(".AWARDTOTAL").html($.fn.netPrice.defaultOptions.currencyFormat(awardvalue));
 						return $.fn.netPrice;
 				}
 				$.fn.netPrice.update = function(){

@@ -6,27 +6,12 @@ Purpose: This file is used by netprice.js to generate the user interface for the
 Change History:
 8-10-2011 - Initial Release
 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<title>Net Price Calculator</title>
-
-</head>
-
-
-
-<body>
-	<div class="title">Net Price Calculator</div>
+	<div class="title screenOnly">Net Price Calculator</div>
 	<!-- 
 	Navigation Bar for moving between slides
 	
 	-->
-    <div class="netprice_nav">
+    <div class="netprice_nav screenOnly">
 		<div class="alignleft">
 			<input type="button" onclick="$.fn.netPrice.previousSlide()" value="Previous"/>
 		</div>
@@ -126,12 +111,10 @@ Change History:
 
                 </p>
 
-            </div>
-
        </div>
 
        <div id="netprice_slide3" class="netprice_slide">
-
+		<h2>Net Price Summary</h2>
        	<p>
 
 			This estimate of an award is based on a student <strong><RESIDENCYLABEL/></strong>, having an EFC of <strong><EFCVALUE/></strong>, 
@@ -514,7 +497,3 @@ Change History:
     </div>
 
     </div>
-
-</body>
-
-</html>

@@ -3,73 +3,75 @@ body{
 	font-family:Verdana, Geneva, sans-serif;
 	font-size:10pt;
 }
-#netprice_container{
-	width:800px;
-	margin:auto;
-	background-color:#fff;
-	border:1px solid #ccc;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	padding:5px;
+@media screen{
+	#netprice_container{
+		width:800px;
+		margin:auto;
+		background-color:#fff;
+		border:1px solid #ccc;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		padding:5px;
+	}
+	#netprice_container .title{
+		background-color:#000099;
+		color:#fff;
+		font-weight:bold;
+		font-size:16pt;
+		padding:5px;
+	}
+	#netprice_container .netprice_nav{
+		border:solid 1px #ccc;
+		color:#fff;
+		padding:5px;
+	}
+	#netprice_container .required{
+		color:#ff0000;
+	}
+	#netprice_container fieldset{
+		width:44%;
+		float:left;
+	}
+	#netprice_container th{
+		text-align:right;	
+	}
+	#netprice_container th p{
+		font-size:10pt;
+		font-weight:normal;
+	}
+	#netprice_container legend{
+		font-weight:bold;
+		font-size:16pt;
+	}
+	#netprice_container td{
+			text-align:right;
+	}
+	#netprice_container .cost-value{
+		border-bottom:dotted 2px #ccc;	
+	}
+	#netprice_container .cost-total{
+		font-weight:bold;
+		border-top:double 2px #000;
+	}
+	#netprice_container .alignleft{
+		float:left;
+	}
+	#netprice_container .alignright{
+		float:right;
+	}
+	#netprice_container .clear{
+		clear:both;
+	}
+	#netprice_container .netprice_slide{
+		display:none;	
+	}
+	#netprice_container .center{
+		text-align:center;	
+	}
 }
-#netprice_container .title{
-	background-color:#000099;
-	color:#fff;
-	font-weight:bold;
-	font-size:16pt;
-	padding:5px;
-}
-#netprice_container .netprice_nav{
-	border:solid 1px #ccc;
-	color:#fff;
-	padding:5px;
-}
-#netprice_container .required{
-	color:#ff0000;
-}
-#netprice_container fieldset{
-	width:44%;
-	float:left;
-}
-#netprice_container th{
-	text-align:right;	
-}
-#netprice_container th p{
-	font-size:10pt;
-	font-weight:normal;
-}
-#netprice_container legend{
-	font-weight:bold;
-	font-size:16pt;
-}
-#netprice_container td{
-		text-align:right;
-}
-#netprice_container .cost-value{
-	border-bottom:dotted 2px #ccc;	
-}
-#netprice_container .cost-total{
-	font-weight:bold;
-	border-top:double 2px #000;
-}
-#netprice_container .alignleft{
-	float:left;
-}
-#netprice_container .alignright{
-	float:right;
-}
-#netprice_container .clear{
-	clear:both;
-}
-#netprice_container .netprice_slide{
-	display:none;	
-}
-#netprice_container .center{
-	text-align:center;	
-}
-
 @media print{
 		#netprice_container .title{ display:none;}
 		#netprice_container .netprice_nav{ display:none;}
 		#netprice_container .screenOnly {display:none;}
+		#netprice_container .printOnly {display:block;}
 }
