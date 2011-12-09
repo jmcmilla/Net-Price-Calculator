@@ -1,11 +1,11 @@
 @charset "utf-8";
-body{
+#netprice_container{
 	font-family:Verdana, Geneva, sans-serif;
 	font-size:10pt;
 }
 @media screen{
 	#netprice_container{
-		width:800px;
+		width:700px;
 		margin:auto;
 		background-color:#fff;
 		border:1px solid #ccc;
